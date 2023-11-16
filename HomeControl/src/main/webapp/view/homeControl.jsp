@@ -1,12 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    session.setAttribute("test","a");
+%>
 <html>
 <head>
     <title>Title</title>
 </head>
 <style>
     body{
-        width:   %;
+        width:100%;
         margin:auto;
         max-width:1200px;
         min-height:670px;

@@ -1,6 +1,21 @@
 <%@ page import="com.example.homecontrol.DB.DBManager" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    //String user_id =  session.getAttribute("test").toString();
+    String user_id = "4";
+    DBManager.newInstance();
+    ResultSet res;
+    try {
+        res = DBManager.getInstance().getDBUserMail().SelectDBUserMail(user_id);
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    int index = 1;
 
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -63,7 +78,7 @@
 <h2>문의 내용</h2>
 <hr>
 <form action="#">
-    <span class="left">##개 메일이 있습니다.</span>
+    <span class="left"></span>
     <span class="right">
         <select>
             <option value="제목" name="제목">제목</option>
@@ -87,15 +102,26 @@
     </thead>
     <tbody>
         <%
-            DBManager.newInstance();
+
+
+
+            while (res.next()){
+                String ID = res.getString("ID");
+                String mail_title = res.getString("title");
+                String uc_date = res.getString("uc_date");
+                String admin_content = res.getString("admin_content");
         %>
-        <tr>
-            <td>1</td>
-            <td class="mail_title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eos fuga illo minima odio optio sed sequi? Aut, cum dicta iusto laborum minima nulla officia porro quo quos repellendus voluptate?</td>
-            <td>아무개</td>
-            <td>231116</td>
-            <td>x</td>
-        </tr>
+            <tr>
+                <td><%=index%></td>
+                <td class="mail_title"><%=mail_title%></td>
+                <td><%=ID%></td>
+                <td><%=uc_date%></td>
+                <td><%=admin_content !=null&&admin_content.isBlank()?"O":"X"%></td>
+            </tr>
+        <%
+            }
+        %>
+
     </tbody>
 </table>
 
