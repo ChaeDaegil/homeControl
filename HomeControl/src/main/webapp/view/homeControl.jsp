@@ -1,187 +1,91 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-
-
-<c:set var="user_id" value="4"/>
-<sql:setDataSource
-        var="dataSource"
-        driver="com.mysql.cj.jdbc.Driver"
-        url="jdbc:mysql://redcan.iptime.org:4322/home"
-        user="root"
-        password="1234"
-        scope="application"/>
-<c:set var="sql_query"
-       value="SELECT * FROM machine" scope="page"/>
-<sql:query var="result" scope="page" dataSource="${dataSource}" sql="${sql_query}"/>
-<c:remove var="sql_query" scope="page"/>
-
-
 <html>
-<style>
-    .btn_div{
-        height:40px;
-        width: 1200px;
-        border:1px solid black;
-        margin: 0 auto;
-        display: flex;
-        justify-content: right;
-        box-sizing: border-box;
-        border-bottom: none;
-    }
-    .btn_div > button{
-        margin: 5px;
-    }
-    main{
-        width: 100%;
-        height: 800px;
-        margin-bottom: 100px;
-    }
-    .machine_input{
-        display: none;
-    }
-    .machine_list{
-        height:800px;
-        width: 1200px;
-        border:1px solid black;
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: stretch;
-
-    }
-    .machine_list>div{
-        height: 100px;
-        width: 150px;
-        background-color: #a7cbff;
-        box-shadow: 5px 5px 5px 5px #868686;
-    }
-
-    .machine_title{
-        height: 25px;
-        text-align: right;
-        padding-right: 10px;
-        border:1px solid black;
-        box-sizing: border-box;
-        border-bottom: none;
-    }
-    .machine_state_con{
-        height: 40px;
-        border:1px solid black;
-        box-sizing: border-box;
-        border-bottom: none;
-        display: flex;
-        justify-content: right;
-    }
-
-    .machine_button_con{
-        height: 35px;
-        border:1px solid black;
-        display: flex;
-        justify-content: right;
-        box-sizing: border-box;
-        padding: 3px;
-    }
-
-    footer{
-        height: 100px;
-        display: flex;
-        background-color: #a7cbff;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
-<%--<script src="js/homeControl.js" defer></script>--%>
 <head>
     <title>Title</title>
 </head>
+<style>
+    body{
+        width:   %;
+        margin:auto;
+        max-width:1200px;
+        min-height:670px;
+        position:relative;
+        justify-content: center;
+    }
+
+    main{
+        box-sizing: border-box;
+        width:100%;
+        height:100%;
+        position:absolute;
+        padding:90px 70px 50px 70px;
+        display: flex;
+        background-color: bisque;
+    }
+
+    aside{
+        width: 20%;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    main > div {
+        box-sizing: border-box;
+        width: 80%;
+        position: relative;
+    }
+    li{
+        list-style-type: none;
+        padding: 5px;
+    }
+    li :hover{
+        background-color: #a7cbff;
+    }
+
+    h4{
+        align-content: center;
+    }
+    #mainSect{
+        background-color: aqua;
+        position: relative;
+    }
+    #leftSect{
+        background-color: aliceblue;
+    }
+    #headSect > div{
+        margin: 0 10px;
+    }
+    article{
+        height: 100%;
+        width: 100%;
+    }
+    iframe{
+        height: 100%;
+        width: 100%;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+</style>
 <body>
-<main>
-    <div class="btn_div">
-        <div class="message"></div>
-        <input class="machine_input" type="text">
-        <button value="${user_id}">추가</button>
-    </div>
-    <div class="machine_list">
-        <c:forEach var="row" items="${result.rows}">
-            <div class="machine_con">
-                <div class="machine_title">
-                    <input style="display: none" type="text">
-                        ${row['machine_name']}
-                </div>
-                <div class="machine_state_con">
-                    <button class="machine_state" value="${row['id_num']}">
-                        <c:choose>
-                            <c:when test = "${row['machine_state'] == 1}">
-                                켜짐
-                            </c:when>
-                            <c:otherwise>
-                                꺼짐
-                            </c:otherwise>
-                        </c:choose>
-                    </button>
-                </div>
-                <div class="machine_button_con">
-                    <button value="${row['id_num']}">수정</button>
-                    <button value="${row['id_num']}">삭제</button>
-                </div>
-            </div>
-        </c:forEach>
-    </div>
-</main>
+    <main >
+        <aside id="leftSect" >
+            <h4>메뉴판</h4>
+            <ul>
+                <li><a href="homeControl_main.jsp" target="mainframe">메인</a></li>
+                <li><a href="homeControl_mail.jsp" target="mainframe">문의 하기</a></li>
+            </ul>
+        </aside>
 
-<footer>
+        <!--main-->
+        <div id="mainSect">
+            <article>
+                <iframe name="mainframe" src="homeControl_main.jsp" frameborder="0"></iframe>
+            </article>
+        </div>
 
-    본 페이지는 상업적 목적이 아닌 개인 프로젝트용으로 제작되었습니다.<br>
-    &#169;PORTFOLIO Daegil Chae. All rights reserved.
-</footer>
-<form class="test"  method="post" hidden="hidden">
-</form>
+    </main>
 </body>
 </html>
-<script>
-    const insertBtn = document.querySelector('.btn_div>button');
-    const machInputTag = document.querySelector('.machine_input');
-    const machines = document.querySelectorAll(".machine_list>.machine_con");
-    let insertCheck = true;
-
-    insertBtn.onclick=(event) =>{
-        if(insertCheck){
-            insertBtn.innerText = "기기 추가";
-            machInputTag.style.display ="block";
-            insertCheck = false;
-        }
-        else{
-            insertBtn.innerText = "추가";
-            machInputTag.style.display ="none";
-            insertCheck = true;
-            let name = machInputTag.value;
-            const form = document.querySelector('.test');
-            form.action = "/insert?query=insert into machine(user_id,machine_name,machine_state) values(${user_id},'"+name+"',0)";
-            form.submit();
-        }
-    }
-    machines.forEach(machine=>{
-        const [updateBtn,deleteBtn] = machine.querySelectorAll('.machine_button_con>button');
-        const stateBtn = machine.querySelector('.machine_state');
-        const form = document.querySelector('.test');
-
-        updateBtn.onclick = ()=>{
-
-        }
-        stateBtn.onclick = (event)=>{
-            let machineId = event.currentTarget.value;
-            let state = event.currentTarget.innerText ==="켜짐"?0:1;
-            console.log(machineId);
-            console.log(state);
-            form.action = "/update?id_num=" + machineId+"&state="+state+"&type=state&db=machine";
-            form.submit();
-        }
-        deleteBtn.onclick = (event)=>{
-            let machineId = event.currentTarget.value;
-            form.action = "/delete?query=delete from machine where id_num='" + machineId+"'" ;
-            form.submit();
-        }
-    });
-
-</script>

@@ -17,23 +17,43 @@ public class DBMachine {
 
         return stmt.executeQuery("select * from machine");
     }
-    public Boolean InsertDBMachine(String sql) throws SQLException {
-        return stmt.execute(sql);
-    }
-    public Boolean deleteDBMachine(String sql) throws SQLException {
-        return stmt.execute(sql);
-    }
-    public Boolean updateNameDBMachine(String name,String id) throws SQLException {
-        return stmt.execute(
-                " UPDATE machine" +
-                        "SET machine_name = '" +name + "'" +
-                        "WHERE id_num = '" + id +"'"
+    public Boolean InsertDBMachine(String machine_name,String user_id) throws SQLException {
+        String sql = String.format(
+                "INSERT INTO machine (user_id,machine_name,machine_state) " +
+                "VALUES ('%s','%s','0') "
+                ,user_id
+                ,machine_name
         );
+        System.out.println(sql);
+        return stmt.execute(sql);
     }
-    public Boolean updateStateDBMachine(String state,String id) throws SQLException {
-        return stmt.execute(
-                " UPDATE machine " +
-                        "SET machine_state = '" + state + "' " +
-                        "WHERE id_num = '" + id +"'");
+    public Boolean deleteDBMachine(String machineId) throws SQLException {
+        String sql = String.format(
+                "DELETE FROM machine " +
+                "WHERE id_num = '%s' "
+                ,machineId
+        );
+        return stmt.execute(sql);
+    }
+    public Boolean updateNameDBMachine(String name,String machine_id) throws SQLException {
+        String sql = String.format(
+                "UPDATE machine " +
+                "SET machine_name = '%s' " +
+                "WHERE id_num = '%s' "
+                ,name
+                ,machine_id
+        );
+        return stmt.execute(sql);
+    }
+    public Boolean updateStateDBMachine(String state,String machine_id) throws SQLException {
+        String sql = String.format(
+                "UPDATE machine " +
+                "SET machine_state = '%s' " +
+                "WHERE id_num = '%s' "
+                ,state
+                ,machine_id
+        );
+
+        return stmt.execute(sql);
     }
 }

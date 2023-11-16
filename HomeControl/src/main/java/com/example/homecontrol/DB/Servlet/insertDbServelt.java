@@ -18,12 +18,17 @@ public class insertDbServelt extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
-        //String dbName = req.getParameter("dbName");
-        String query = req.getParameter("query");
+        /////////////////////////////////////////////////////////////////////////////
+
+        String db = req.getParameter("db");
         DBManager.newInstance();
         try {
-            DBManager.getInstance().getDbMachine().InsertDBMachine(query);
-            resp.sendRedirect("/view/homeControl.jsp");
+            if(db.equals("machine")){
+                String machine_name = req.getParameter("machine_name");
+                String user_id = req.getParameter("user_id");
+                DBManager.getInstance().getDbMachine().InsertDBMachine(machine_name,user_id);
+            }
+            resp.sendRedirect("/view/homeControl_main.jsp");
         }catch (Exception e){
             writer.println("추가시 에러 발생");
             System.out.println(e);

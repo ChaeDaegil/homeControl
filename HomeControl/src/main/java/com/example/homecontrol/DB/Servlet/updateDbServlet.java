@@ -18,6 +18,8 @@ public class updateDbServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
+        /////////////////////////////////////////////////////////////////////////////
+
         String db = req.getParameter("db");
         String type = req.getParameter("type");
         DBManager.newInstance();
@@ -28,7 +30,7 @@ public class updateDbServlet extends HttpServlet {
                 String state = req.getParameter("state");
                 DBManager.getInstance().getDbMachine().updateStateDBMachine(state,id_num);
             }
-            resp.sendRedirect("/view/homeControl.jsp");
+            resp.sendRedirect("/view/homeControl_main.jsp");
         }catch (Exception e){
             writer.println("업데이트시 에러 발생");
             System.out.println(e);
