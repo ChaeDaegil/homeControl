@@ -24,7 +24,6 @@ public class DBMachine {
                 ,user_id
                 ,machine_name
         );
-        System.out.println(sql);
         return stmt.execute(sql);
     }
     public Boolean deleteDBMachine(String machineId) throws SQLException {

@@ -9,6 +9,7 @@ public class DBManager{
     private static String user = "root";
     private static String pw = "1234";
     private static DBMachine dbMachine = null;
+    private static DBUserMail dbUserMail = null;
     public DBManager() {}
     public static void newInstance(){
         if(Instance==null){
@@ -17,6 +18,7 @@ public class DBManager{
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection(url, user, pw);
                 dbMachine = new DBMachine(conn);
+                dbUserMail = new DBUserMail(conn);
             }catch (Exception e){
                 System.out.println(e);
             }
@@ -29,4 +31,5 @@ public class DBManager{
     public DBMachine getDbMachine() {
         return dbMachine;
     }
+    public DBUserMail getDBUserMail() {return dbUserMail;}
 }
