@@ -37,6 +37,10 @@
     }
     li{
         list-style-type: none;
+        padding: 5px;
+    }
+    li :hover{
+        background-color: #a7cbff;
     }
     header{
         height: 50px;
@@ -54,13 +58,18 @@
         align-content: center;
     }
     #mainSect{
-     background-color: gray;
+        background-color: gray;
+        position: relative;
     }
     #leftSect{
         background-color: aliceblue;
     }
     #headSect > div{
         margin: 0 10px;
+    }
+    article{
+        height: 100%;
+        width: 100%;
     }
 
 
@@ -84,8 +93,8 @@
         <aside id="leftSect" >
             <h4>메뉴판</h4>
             <ul>
-                <li><a href="#">메인</a></li>
-                <li><a href="#">문의 확인</a></li>
+                <li><a href="./admin_main.html" target="mainframe">메인</a></li>
+                <li><a href="./admin_mail.html" target="mainframe">문의 확인</a></li>
         <!--이거 화면 바뀌는거 서블릿으로 해야하나-->
             </ul>
         </aside>
@@ -93,10 +102,10 @@
 
         <!--main-->
         <div id="mainSect">
-            <section >
-<!--                화면 출력 -->
-                요기는 메인 화면 출력 예정
-            </section>
+
+                <article>
+                    <iframe name="mainframe" src="./admin_main.html" frameborder="0"></iframe>
+                </article>
         </div>
 
     </main>
