@@ -3,28 +3,30 @@ package com.example.homecontrol.DB;
 import java.sql.*;
 
 public class DBManager{
-    private DBManager Instance = null;
-    private Connection conn = null;
-    private String url = "jdbc:mysql://redcan.iptime.org:4322/home";
-    private String user = "root";
-    private String pw = "1234";
-
+    private static DBManager Instance = null;
+    private static Connection conn = null;
+    private static String url = "jdbc:mysql://redcan.iptime.org:4322/home";
+    private static String user = "root";
+    private static String pw = "1234";
+    private static DBMachine dbMachine = null;
     public DBManager() {}
-    public DBManager newInstance(){
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            this.conn = DriverManager.getConnection(url, user, pw);
-
-        }catch (Exception e){
-            System.out.println(e);
-            return null;
+    public static void newInstance(){
+        if(Instance==null){
+            try{
+                Instance = new DBManager();
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection(url, user, pw);
+                dbMachine = new DBMachine(conn);
+            }catch (Exception e){
+                System.out.println(e);
+            }
         }
-
-        if(this.Instance!=null)
-            this.Instance = new DBManager();
-        return this.Instance;
     }
-    public DBManager getInstance() {
+    public static DBManager getInstance() {
         return Instance;
+    }
+
+    public DBMachine getDbMachine() {
+        return dbMachine;
     }
 }
