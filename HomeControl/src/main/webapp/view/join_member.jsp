@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 
 <html>
 <style>
@@ -53,7 +53,6 @@ form{
 
 <body>
 
-
     <main>
         <section>
             <h2>회원가입 페이지</h2>
@@ -62,14 +61,14 @@ form{
                     <label>ID</label><input type="text" name="newID" class="input"> <input type="button" name="idCheck"  value="id중복 확인">
                 </div>
                 <div>
-                    <label>PASSWORD</label><input type="password" name="newPW" class="input">
+                    <label>PASSWORD</label><input type="text" name="newPW" class="input">
                 </div>
                 <div>
-                    <label>PASSWORD REPEAT</label><input type="password" name="pwCheck" class="input">
+                    <label>PASSWORD REPEAT</label><input type="text" name="pwCheck" class="input">
                 </div>
                 <div class="buttons">
                     <input type="button" value="취소" name="cancel">
-                    <button name="join">가입</button>
+                    <button name="join" id="join">가입</button>
                 </div>
             </form>
         </section>
@@ -85,26 +84,56 @@ form{
 </html>
 
 <script>
-let [newId,idCheck,newPw,pwCheck,cancel] = document.getElementsByTagName("input");
+const  inputs = document.getElementsByTagName("input");
+const [newId,idCheck,newPw,pwCheck,cancel] = inputs;
+let joinBtn = document.getElementById("join");
+const joinForm = document.getElementById("joinForm");
+
+
 // id
 const idRegExp = /^[a-z]+[a-z0-9]{5,11}$/g;
 // pw
-const pwRegExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+const pwRegExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 // 이름
 const nameRegExp = /^[ㄱ-ㅎ가-힣]+$/;
 // phone
 const phoneRegExp = /^01([0|1|[6-9])-?([0-9]{3,4})-?([0-9]{4})$/;
+let isClear = false;
+let correctPw = false;
+
+
+joinForm.onchange = () => {
+    console.log("id" + idRegExp.test(newId.value));
+    console.log("pw" + pwRegExp.test(newPw.value));
+    console.log(correctPw + "pwcheck");
+
+    if(idRegExp.test(newId.value) && pwRegExp.test(newPw.value) && correctPw){
+        console.log("gd")
+            joinBtn.setAttribute("disabled",false);
+    }
+    else {
+        joinBtn.setAttribute("disabled",true);
+        // joinBtn.
+    }
+}
+
+
+// pw check 동일하면 트루로 바꾸기
+pwCheck.onkeyup = () => {
+    correctPw = newPw.value === pwCheck.value;
+}
 
 
 
+// 클릭하면 메인화면으로 날려버리기
+cancel.onclick = () =>{
+    window.location.href = "#";
+}
 
-
-
-
-
-
-
-
+// 클릭하면 데이터베이스 정보 조회해서 비교하기
+// idCheck.onclick = () =>{
+//
+// }
 
 
 
