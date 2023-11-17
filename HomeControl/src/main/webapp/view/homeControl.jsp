@@ -25,15 +25,3 @@
     </main>
 </body>
 </html>
-<script>
-    const frame = document.querySelector('iframe');
-    const menu = <%=menu%>;
-    if(menu!=null){
-        if(menu === "메인"){
-            frame.src = "homeControl_main.jsp";
-        }
-        else if(menu === "메일"){
-            frame.src = "homeControl_mailbox.jsp";
-        }
-    }
-</script>

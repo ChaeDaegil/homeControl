@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DBUserMail {
     private Connection conn = null;
@@ -36,7 +39,7 @@ public class DBUserMail {
                 "inner join user " +
                 "on user_mail.user_id = user.id_num " +
                 "where user_mail.user_id = '%s' and " +
-                "INSTR(title,'%s')>0"
+                "INSTR(title,'%s')>0 "
                 , user_id
                 ,title
         );
@@ -56,11 +59,12 @@ public class DBUserMail {
     }
     public Boolean insertDBUserMail(String user_id,String title,String user_content) throws SQLException {
         String sql = String.format(
-                "insert into user_mail (user_id,title,user_content) " +
-                "values ('%s','%s','%s')"
+                "insert into user_mail (user_id,title,user_content,uc_date) " +
+                "values ('%s','%s','%s','%s')"
                 ,user_id
                 ,title
-                , user_content
+                ,user_content
+                ,LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"))
         );
         return stmt.execute(sql);
     }
@@ -71,12 +75,16 @@ public class DBUserMail {
         );
         return stmt.execute(sql);
     }
-    public Boolean updateDBUserMailContent(String user_mail_id,String user_content) throws SQLException {
+    public Boolean updateDBUserMailContent(String user_mail_id,String title,String user_content) throws SQLException {
         String sql = String.format(
                 "update user_mail " +
-                "set user_content = '%s' " +
+                "set user_content = '%s', " +
+                "title = '%s', " +
+                "uc_date = '%s' " +
                 "where user_mail_id = '%s' "
                 ,user_content
+                ,title
+                ,LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"))
                 , user_mail_id
         );
         return stmt.execute(sql);

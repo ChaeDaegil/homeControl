@@ -7,7 +7,7 @@
 <%
     //String user_id =  session.getAttribute("test").toString();
 
-    String user_id = "4";
+    String user_id = (String)session.getAttribute("userid");
     DBManager.newInstance();
     ResultSet res = null;
     try {

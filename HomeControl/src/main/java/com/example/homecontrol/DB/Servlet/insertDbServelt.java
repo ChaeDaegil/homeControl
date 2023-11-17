@@ -27,8 +27,17 @@ public class insertDbServelt extends HttpServlet {
                 String machine_name = req.getParameter("machine_name");
                 String user_id = req.getParameter("user_id");
                 DBManager.getInstance().getDbMachine().InsertDBMachine(machine_name,user_id);
+                resp.sendRedirect("/view/homeControl_main.jsp");
             }
-            resp.sendRedirect("/view/homeControl_main.jsp");
+            else if(db.equals("user_mail")){
+                String user_id = req.getParameter("user_id");
+                String title = req.getParameter("title");
+                String user_content = req.getParameter("content");
+                DBManager.getInstance().getDBUserMail().insertDBUserMail(user_id,title,user_content);
+
+                resp.sendRedirect("/view/homeControl_mailbox.jsp");
+            }
+
         }catch (Exception e){
             writer.println("추가시 에러 발생");
             System.out.println(e);
