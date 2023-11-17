@@ -20,7 +20,7 @@
 
  try {
      ResultSet res = con.getDBUser().SelectDBUserID(id);
-     res.next();
+     if(res.next()){
             if (res.getString("PW").equals(pw)) {
                 String id_num = res.getString("id_num");
                 session.setAttribute("userid",id_num);
@@ -35,9 +35,11 @@
             else{
                 response.sendRedirect("/view/login.jsp");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
+     else response.sendRedirect("/view/login.jsp");
+     } catch (SQLException e) {
+     throw new RuntimeException(e);
+ }
 
 %>
 <html>
