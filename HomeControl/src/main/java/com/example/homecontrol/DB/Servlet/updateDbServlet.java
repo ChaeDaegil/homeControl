@@ -35,8 +35,17 @@ public class updateDbServlet extends HttpServlet {
                 String mail_id = req.getParameter("mail_id");
                 String title = req.getParameter("title");
                 String content = req.getParameter("content");
-                DBManager.getInstance().getDBUserMail().updateDBUserMailContent(mail_id,title,content);
-                resp.sendRedirect("/view/homeControl_mailbox.jsp");
+                String adminContent = req.getParameter("admin_content");
+                if(adminContent.isEmpty()){
+                    DBManager.getInstance().getDBUserMail().updateDBUserMailContent(mail_id,title,content);
+                    resp.sendRedirect("/view/homeControl_mailbox.jsp");
+                }
+                else {
+                    DBManager.getInstance().getDBUserMail().updateDBUserMailContent(mail_id,adminContent);
+                    resp.sendRedirect("/view/admin_mailbox.jsp");
+                }
+
+
             }
 
         }catch (Exception e){

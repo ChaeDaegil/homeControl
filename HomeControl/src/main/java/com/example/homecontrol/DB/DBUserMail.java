@@ -1,5 +1,6 @@
 package com.example.homecontrol.DB;
 
+import java.nio.file.ClosedFileSystemException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,15 @@ public class DBUserMail {
         stmt = conn.createStatement();
         this.conn = conn;
     }
+
+    public ResultSet SelectDBAllMail() throws SQLException {
+        String sql = String.format(
+                "select * from user_mail" + " inner join user " +
+                        "on user_mail.user_id = user.id_num "
+        );
+        return stmt.executeQuery(sql);
+    }
+
     public ResultSet SelectDBUserMail(String mail_id) throws SQLException {
         String sql = String.format(
                 "select * from user_mail where user_mail_id = '%s'"
@@ -42,6 +52,24 @@ public class DBUserMail {
                 "INSTR(title,'%s')>0 "
                 , user_id
                 ,title
+        );
+        return stmt.executeQuery(sql);
+    }
+    public ResultSet SelectDBUserSearchTitle(String title) throws SQLException {
+        String sql = String.format(
+                "select * from user_mail " +"inner join user "
+                        + "on user_mail.user_id = user.id_num "
+                        + "where " + "INSTR(title,'%s')>0 "
+                ,title
+        );
+        return stmt.executeQuery(sql);
+    }
+    public ResultSet SelectDBUserSearchUser(String user) throws SQLException {
+        String sql = String.format(
+                "select * from user_mail " +"inner join user "
+                        + "on user_mail.user_id = user.id_num "
+                        + "where " + "`ID` = `%s`"
+                ,user
         );
         return stmt.executeQuery(sql);
     }
@@ -87,6 +115,19 @@ public class DBUserMail {
                 ,LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"))
                 , user_mail_id
         );
+        return stmt.execute(sql);
+    }
+    public Boolean updateDBUserMailContent(String user_mail_id, String admin_content) throws SQLException {
+        String sql = String.format(
+                "update user_mail " +
+                        "set uc_date = '%s', " +
+                        "admin_content = '%s' " +
+                        "where user_mail_id = '%s' "
+                ,LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"))
+                ,admin_content
+                ,user_mail_id
+        );
+        System.out.println(sql);
         return stmt.execute(sql);
     }
     public Boolean updateDBUserMailAdminContent(String user_mail_id,String admin_content) throws SQLException {

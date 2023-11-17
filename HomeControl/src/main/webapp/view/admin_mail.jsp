@@ -4,25 +4,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<%--<%--%>
-<%--    String mail_id = request.getParameter("mail_id");--%>
-<%--    ResultSet res = DBManager.getInstance().getDBUserMail().SelectDBUserMail(mail_id);--%>
-<%--    res.next();--%>
-<%--    String title = res.getString("title");--%>
-<%--    String user_content = res.getString("user_content");--%>
-<%--    String admin_content = res.getString("admin_content");--%>
-<%--    DBManager.newInstance();--%>
-<%--    if(admin_content == null){--%>
-<%--        admin_content = "";--%>
-<%--    }--%>
-<%--%>--%>
+<%
+    String mail_id = request.getParameter("mail_id");
+    ResultSet res = DBManager.getInstance().getDBUserMail().SelectDBUserMail(mail_id);
+    res.next();
+    String title = res.getString("title");
+    String user_content = res.getString("user_content");
+    String uc_date = res.getString("uc_date");
+    String admin_content = res.getString("admin_content");
+    String ac_date = res.getString("ac_date");
+    DBManager.newInstance();
 
-<%--<c:set var="user_id" value="4"/>--%>
-
-<%--<c:set var="sql_query"--%>
-<%--       value="SELECT * FROM user_mail" scope="page"/>--%>
-<%--<sql:query var="result" scope="page" dataSource="${dataSource}" sql="${sql_query}"/>--%>
-<%--<c:remove var="sql_query" scope="page"/>--%>
+    if(admin_content == null){
+        admin_content = "";
+    }
+%>
 
 <html>
 <head>
@@ -31,7 +27,7 @@
 <style>
 
     .user_content{
-        border: 1px solid black;
+        position: relative;
         height: 30%;
     }
     .admin_content{
@@ -44,12 +40,13 @@
         text-align: right;
         margin: 10px;
     }
-    #answerText{
+    textarea{
         width: 100%;
         height: 100%;
         resize: none;
         box-sizing: border-box;
     }
+
 </style>
 
 
@@ -58,34 +55,53 @@
 <h2>문의 내용</h2>
 <hr>
 <main>
-    <h3><%=title%></h3>
+    <h3>
+        <input type="text" readonly="readonly" value="<%=title%>">
+    </h3>
     <div class="user_content">
-        <%=user_content%>
+        <textarea name="userContent" id="userContent" readonly><%=user_content%></textarea>
     </div>
+    <div class="right"><%=uc_date%></div>
     <hr>
 
     <div class="admin_content">
-       <textarea name="answerText" id="answerText"><%=admin_content%></textarea>
+       <textarea name="answerText" id="answerText" maxlength="149" readonly><%=admin_content%></textarea>
     </div>
 
     <div class="btn_div">
-        <button>답변하기</button>
-        <button>닫기</button>
+        <button name="answer">답변하기</button>
+        <button name="close">닫기</button>
     </div>
+    <form class="sendForm"  method="post" hidden="hidden"></form>
 </main>
 </body>
 </html>
 <script>
     const [answerBtn,closeBtn] = document.querySelectorAll('button');
-    const textArea = document.querySelector("textarea");
+    const textArea = document.getElementById("answerText");
+    const userTextArea = document.getElementById("userContent");
+
 
     if (textArea.value !== ""){
-        answerBtn.value = "수정하기";
+        answerBtn.innerText = "수정하기";
     }
+    else answerBtn.innerText = "답변하기";
 
     answerBtn.onclick = () => {
-        console.log(textArea.value);
+        if(answerBtn.innerText === "저장하기"){
+            textArea.readOnly = true;
+            const form = document.querySelector('.sendForm');
+            form.action = "/update?"+"&mail_id=<%=mail_id%>&db=user_mail&admin_content="+textArea.value;
+            form.submit();
+        }
+        else{
+            answerBtn.innerText = "저장하기";
+            textArea.readOnly = false;
+        }
+
+
     }
+
     closeBtn.onclick = () =>{
         location.href = "javascript:history.back();"
     }

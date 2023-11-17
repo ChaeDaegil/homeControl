@@ -1,4 +1,6 @@
-package com.example.homecontrol.DB;
+package com.example.homecontrol.DB.Servlet;
+
+import com.example.homecontrol.DB.DBManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
