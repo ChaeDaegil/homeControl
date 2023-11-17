@@ -25,6 +25,15 @@
     .right{
         text-align: right;
     }
+    textarea{
+        width: 100%;
+        height: 100%;
+        resize: none;
+        background-color: aqua;
+    }
+    input{
+        background-color: aqua;
+    }
 </style>
 <%
     String mail_id = request.getParameter("mail_id");
@@ -41,9 +50,11 @@
     <h2>문의 내용</h2>
     <hr>
     <main>
-        <h3><%=title%></h3>
+        <h3>
+            <input type="text" readonly="readonly" value="<%=title%>">
+        </h3>
         <div class="user_content">
-            <%=user_content%>
+            <textarea name="" id="" cols="30" rows="10" readonly="readonly"><%=user_content%></textarea>
         </div>
         <div class="right"><%=uc_date%></div>
         <hr>
@@ -52,15 +63,36 @@
         </div>
         <div class="right"><%=ac_date!=null&&!ac_date.isBlank()?ac_date:""%></div>
         <div class="btn_div">
-            <button>닫기</button>
+            <button class="update_btn">수정 하기</button>
+            <button class="close_btn">닫기</button>
         </div>
     </main>
 </body>
+<form class="sendForm"  method="post" hidden="hidden"></form>
 </html>
 <script>
-    const closeBtn = document.querySelector('button');
+    const closeBtn = document.querySelector('.close_btn');
+    const updateBtn = document.querySelector('.update_btn');
+    const textArea = document.querySelector('textarea');
+    const titleInput = document.querySelector('input');
 
     closeBtn.onclick = () =>{
         location.href = "javascript:history.back();"
+    }
+    updateBtn.onclick = (event) =>{
+        if(updateBtn.innerText === "수정 하기"){
+            updateBtn.innerText = "저장"
+            textArea.readOnly = false
+            textArea.style.backgroundColor = "white"
+            titleInput.readOnly = false
+            titleInput.style.backgroundColor = "white"
+        }
+        else if(updateBtn.innerText === "저장"){
+            console.log(titleInput.value);
+            console.log(textArea.value);
+            const form = document.querySelector('.sendForm');
+            form.action = "/update?&title="+titleInput.value+"&content="+textArea.value+"&mail_id=<%=mail_id%>&db=user_mail";
+            form.submit();
+        }
     }
 </script>

@@ -23,22 +23,27 @@
     <h2>문의 내용</h2>
     <hr>
     <div>
-        <input type="text">
+        제목 : <input type="text">
         <textarea name="" id="" maxlength="149"></textarea>
     </div>
     <div class="right">
-        <button>저장</button>
+        <button class="back_btn">뒤로가기</button>
+        <button class="save_btn">저장</button>
     </div>
 </body>
+<form class="sendForm"  method="post" hidden="hidden"></form>
 </html>
 <script>
-    const saveBtn = document.querySelector('.right');
+    const saveBtn = document.querySelector('.save_btn');
+    const backBtn = document.querySelector('.back_btn');
     const titleTag = document.querySelector('input');
     const textTag = document.querySelector('textarea');
     saveBtn.onclick = () =>{
-        const form = document.querySelector('.test');
-
-        form.action = "/insert?user_id=<%=user_id%>&title=&db=user_mail";
+        const form = document.querySelector('.sendForm');
+        form.action = "/insert?user_id=<%=user_id%>&title="+titleTag.value+"&content="+textTag.value+"&db=user_mail";
         form.submit();
+    }
+    backBtn.onclick = () =>{
+        location.href = "javascript:history.back();"
     }
 </script>

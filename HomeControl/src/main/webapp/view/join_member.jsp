@@ -1,3 +1,5 @@
+<%@ page import="com.example.homecontrol.DB.DBManager" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 
@@ -101,7 +103,6 @@ form{
     // let idCheck = false;
 
     function check_all(){
-
         let id = newId.value;
         let password = newPw.value;
         let chpassword = pwCheck.value;

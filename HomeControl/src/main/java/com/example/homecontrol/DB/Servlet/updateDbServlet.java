@@ -29,8 +29,16 @@ public class updateDbServlet extends HttpServlet {
                 String id_num = req.getParameter("id_num");
                 String state = req.getParameter("state");
                 DBManager.getInstance().getDbMachine().updateStateDBMachine(state,id_num);
+                resp.sendRedirect("/view/homeControl_main.jsp");
             }
-            resp.sendRedirect("/view/homeControl_main.jsp");
+            else if(db.equals("user_mail")){
+                String mail_id = req.getParameter("mail_id");
+                String title = req.getParameter("title");
+                String content = req.getParameter("content");
+                DBManager.getInstance().getDBUserMail().updateDBUserMailContent(mail_id,title,content);
+                resp.sendRedirect("/view/homeControl_mailbox.jsp");
+            }
+
         }catch (Exception e){
             writer.println("업데이트시 에러 발생");
             System.out.println(e);

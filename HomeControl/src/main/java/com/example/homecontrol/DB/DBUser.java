@@ -34,7 +34,13 @@ public class DBUser {
         );
         return stmt.executeQuery(sql);
     }
-
+    public Boolean SelectDBUserIDCheck(String user_id) throws SQLException {
+        String sql = String.format(
+                "select * from user where ID = '%s'"
+                ,user_id
+        );
+        return stmt.execute(sql);
+    }
     public Boolean InsertDBUser(String user_id,String user_password) throws SQLException {
         String sql = String.format(
                 "INSERT INTO `home`.`user` (`ID`,`PW`,`auth`)" +
