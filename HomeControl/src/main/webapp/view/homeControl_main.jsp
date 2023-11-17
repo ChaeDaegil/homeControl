@@ -1,20 +1,21 @@
+<%@ page import="com.example.homecontrol.DB.DBManager" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
+<%
+    String user_id = (String)session.getAttribute("userid");
+    DBManager.newInstance();
+    ResultSet res =null;
+    try {
+        res = DBManager.getInstance().getDbMachine().SelectDBMachine(user_id);
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+%>
 
-<c:set var="user_id" value="4"/>
-<sql:setDataSource
-        var="dataSource"
-        driver="com.mysql.cj.jdbc.Driver"
-        url="jdbc:mysql://redcan.iptime.org:4322/home"
-        user="root"
-        password="1234"
-        scope="application"/>
-<c:set var="sql_query"
-       value="SELECT * FROM machine" scope="page"/>
-<sql:query var="result" scope="page" dataSource="${dataSource}" sql="${sql_query}"/>
-<c:remove var="sql_query" scope="page"/>
 
 
 <html>
@@ -97,33 +98,45 @@
     <div class="btn_div">
         <div class="message"></div>
         <input class="machine_input" type="text">
-        <button value="${user_id}">추가</button>
+        <button value="<%=user_id%>">추가</button>
     </div>
     <div class="machine_list">
-        <c:forEach var="row" items="${result.rows}">
-            <div class="machine_con">
-                <div class="machine_title">
-                    <input style="display: none" type="text">
-                        ${row['machine_name']}
-                </div>
-                <div class="machine_state_con">
-                    <button class="machine_state" value="${row['id_num']}">
-                        <c:choose>
-                            <c:when test = "${row['machine_state'] == 1}">
-                                켜짐
-                            </c:when>
-                            <c:otherwise>
-                                꺼짐
-                            </c:otherwise>
-                        </c:choose>
-                    </button>
-                </div>
-                <div class="machine_button_con">
-                    <button value="${row['id_num']}">수정</button>
-                    <button value="${row['id_num']}">삭제</button>
-                </div>
+        <%
+            while (res.next()){
+                String machine_name = res.getString("machine_name");
+                String id_num = res.getString("id_num");
+                String machine_state = res.getString("machine_state");
+        %>
+        <div class="machine_con">
+            <div class="machine_title">
+                <input style="display: none" type="text">
+                <%=machine_name%>
             </div>
-        </c:forEach>
+            <div class="machine_state_con">
+                <button class="machine_state" value="<%=id_num%>">
+                    <%
+                        if(machine_state.equals("1")){
+                    %>
+                        켜짐
+                    <%
+                        }
+                        else {
+                    %>
+                        꺼짐
+                    <%
+                        }
+                    %>
+
+                </button>
+            </div>
+            <div class="machine_button_con">
+                <button value="<%=id_num%>">수정</button>
+                <button value="<%=id_num%>">삭제</button>
+            </div>
+        </div>
+        <%    }
+        %>
+
     </div>
 </main>
 
@@ -149,7 +162,7 @@
             insertCheck = true;
             let name = machInputTag.value;
             const form = document.querySelector('.test');
-            form.action = "/insert?user_id=${user_id}&machine_name="+name+"&db=machine";
+            form.action = "/insert?user_id=<%=user_id%>&machine_name="+name+"&db=machine";
             form.submit();
         }
     }

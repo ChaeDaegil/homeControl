@@ -5,7 +5,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <%
-    //String user_id =  session.getAttribute("test").toString();
 
     String user_id = (String)session.getAttribute("userid");
     DBManager.newInstance();
@@ -17,9 +16,6 @@
         if(sel!=null&&!sel.isBlank()){
 
             if(sel.equals("제목")){
-                DBManager.getInstance();
-                DBManager.getInstance().getDBUserMail();
-
                 res = DBManager.getInstance().getDBUserMail().SelectDBUserSearchTitle(user_id,search);
             }
             else if(sel.equals("내용")){

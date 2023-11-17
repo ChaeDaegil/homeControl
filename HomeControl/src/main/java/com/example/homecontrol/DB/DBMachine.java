@@ -17,6 +17,13 @@ public class DBMachine {
 
         return stmt.executeQuery("select * from machine");
     }
+    public ResultSet SelectDBMachine(String user_id) throws SQLException {
+        String sql = String.format(
+                "select * from machine where user_id='%s'"
+                ,user_id
+        );
+        return stmt.executeQuery(sql);
+    }
     public Boolean InsertDBMachine(String machine_name,String user_id) throws SQLException {
         String sql = String.format(
                 "INSERT INTO machine (user_id,machine_name,machine_state) " +
