@@ -13,13 +13,16 @@ public class DBUserMail {
         stmt = conn.createStatement();
         this.conn = conn;
     }
-    public ResultSet SelectDBUserMail() throws SQLException {
-
-        return stmt.executeQuery("select * from user_mail");
-    }
-    public ResultSet SelectDBUserMail(String user_id) throws SQLException {
+    public ResultSet SelectDBUserMail(String mail_id) throws SQLException {
         String sql = String.format(
-                "select ID,title,user_content,uc_date,admin_content,ac_date from user_mail " +
+                "select * from user_mail where user_mail_id = '%s'"
+                ,mail_id
+        );
+        return stmt.executeQuery(sql);
+    }
+    public ResultSet SelectDBUserAllMail(String user_id) throws SQLException {
+        String sql = String.format(
+                "select * from user_mail " +
                 "inner join user " +
                 "on user_mail.user_id = user.id_num " +
                 "where user_mail.user_id = '%s' ",
