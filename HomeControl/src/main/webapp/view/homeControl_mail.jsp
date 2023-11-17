@@ -5,36 +5,8 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="css/homeControl_mail.css">
 </head>
-<style>
-
-    .user_content{
-        border: 1px solid black;
-        height: 30%;
-    }
-    .admin_content{
-        border: 1px solid black;
-        height: 30%;
-    }
-    .btn_div{
-        display: flex;
-        justify-content: right;
-        text-align: right;
-        margin: 10px;
-    }
-    .right{
-        text-align: right;
-    }
-    textarea{
-        width: 100%;
-        height: 100%;
-        resize: none;
-        background-color: aqua;
-    }
-    input{
-        background-color: aqua;
-    }
-</style>
 <%
     String mail_id = request.getParameter("mail_id");
     ResultSet res = DBManager.getInstance().getDBUserMail().SelectDBUserMail(mail_id);

@@ -16,82 +16,10 @@
     }
 %>
 
-
-
 <html>
-<style>
-    body{
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-    .btn_div{
-        height:40px;
-        width: 100%;
-        margin: 0 auto;
-        display: flex;
-        justify-content: right;
-        border-bottom: 1px solid black;
-    }
-    .btn_div > button{
-        margin: 5px;
-    }
-    main{
-        width: 100%;
-        height: 100%;
-        margin-bottom: 100px;
-    }
-    .machine_input{
-        display: none;
-    }
-    .machine_list{
-        height:100%;
-        width: 100%;
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: stretch;
-
-    }
-    .machine_list>div{
-        height: 100px;
-        width: 150px;
-        background-color: #a7cbff;
-        box-shadow: 5px 5px 5px 5px #868686;
-    }
-
-    .machine_title{
-        height: 25px;
-        text-align: right;
-        padding-right: 10px;
-        border:1px solid black;
-        box-sizing: border-box;
-        border-bottom: none;
-    }
-    .machine_state_con{
-        height: 40px;
-        border:1px solid black;
-        box-sizing: border-box;
-        border-bottom: none;
-        display: flex;
-        justify-content: right;
-    }
-
-    .machine_button_con{
-        height: 35px;
-        border:1px solid black;
-        display: flex;
-        justify-content: right;
-        box-sizing: border-box;
-        padding: 3px;
-    }
-
-</style>
-<%--<script src="js/homeControl.js" defer></script>--%>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="css/homControl_main.css">
 </head>
 <body>
 <main>
@@ -139,7 +67,6 @@
 
     </div>
 </main>
-
 <form class="test"  method="post" hidden="hidden">
 </form>
 </body>
