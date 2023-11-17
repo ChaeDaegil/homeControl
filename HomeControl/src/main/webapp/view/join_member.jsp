@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%--<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
+
 
 <html>
 <style>
@@ -63,15 +64,16 @@ form{
     <main>
         <section>
             <h2>회원가입 페이지</h2>
-            <form action="#" id="joinForm" method="post">
+            <form action="<c:url value="/newuserinsert"/>" id="joinForm" method="post">
                 <div>
-                    <label>ID</label><input type="text" name="newID" class="input"> <input class="right" type="button" name="idCheck"  value="id중복 확인">
+                    <label for="newID">ID</label><input type="text" id="newID" class="input" name="newID">
+                    <input class="right" type="button" id="idCheck"  value="id중복 확인" name="idCheck">
                 </div>
                 <div>
-                    <label>PASSWORD</label><input type="text" name="newPW" class="input">
+                    <label for="newPW">PASSWORD</label><input type="password" id="newPW" class="input" name="newPW">
                 </div>
                 <div>
-                    <label>PASSWORD REPEAT</label><input type="text" name="pwCheck" class="input">
+                    <label for="pwCheck">PASSWORD REPEAT</label><input type="password" id="pwCheck" class="input" name="pwCheck">
                 </div>
                 <div class="buttons">
                     <input type="button" value="취소" name="cancel">
@@ -91,46 +93,55 @@ form{
 </html>
 
 <script>
-const  inputs = document.getElementsByTagName("input");
-const [newId,idCheck,newPw,pwCheck,cancel] = inputs;
-let joinBtn = document.getElementById("join");
-const joinForm = document.getElementById("joinForm");
 
+    let joinBtn = document.getElementById("join");
+    const joinForm = document.getElementById("joinForm");
+    const  inputs = document.getElementsByTagName("input");
+    const [newId,idCheck,newPw,pwCheck,cancel] = inputs;
+    // let idCheck = false;
 
-// id
-const idRegExp = /^[a-z]+[a-z0-9]{5,11}$/g;
-// pw
-const pwRegExp = /^[a-zA-Z0-9~!@#$%^&*()_-]{10,20}$/;
+    function check_all(){
+
+        let id = newId.value;
+        let password = newPw.value;
+        let chpassword = pwCheck.value;
+            console.log(chpassword);
+        // id reg
+        const idRegExp = /^[A-Za-z]{4,20}$/;
+        // pw reg
+        const pwRegExp = /^[a-zA-Z0-9~!@#$%^&*()_-]{10,20}$/;
+
+        if(!idRegExp.test(id)){
+            console.log(id);
+            alert("형식에 맞춰 ID를 입력하세요");
+            newId.value = "";
+            newId.focus();
+            return false;
+        }
+        else if(!pwRegExp.test(password)){
+            alert("형식에 맞춰 password를 입력해주세요");
+            newPw.value = "";
+            newPw.focus();
+            return false;
+        }
+
+        else if(chpassword.slice(0,chpassword.length) !== password.slice(0,password.length)){
+            alert("비밀번호가 동일하지 않습니다.");
+            pwCheck.value= "";
+            pwCheck.focus();
+            return false;
+        }
+
+        else{
+            return true;
+
+        }
+    }
+
 // 이름
 // const nameRegExp = /^[ㄱ-ㅎ가-힣]+$/;
 // // phone
 // const phoneRegExp = /^01([0|1|[6-9])-?([0-9]{3,4})-?([0-9]{4})$/;
-
-let isClear = idRegExp.test(newId.value) && pwRegExp.test(newPw.value) && correctPw;
-let correctPw = false;
-
-
-joinForm.onkeyup = () => {
-    console.log(correctPw);
-    console.log(idRegExp.test(newId.value) && correctPw);
-    console.log(isClear);
-
-    if(isClear){
-        console.log("gd")
-            joinBtn.removeAttribute("disabled");
-            joinBtn.disabled = false;
-    }
-    else {
-        joinBtn.setAttribute("disabled",true);
-    }
-}
-
-
-// pw check 동일하면 트루로 바꾸기
-pwCheck.onkeyup = () => {
-    correctPw = newPw.value === pwCheck.value;
-}
-
 
 
 // 클릭하면 메인화면으로 날려버리기
@@ -138,10 +149,21 @@ cancel.onclick = () =>{
     window.location.href = "login.jsp";
 }
 
+
 // 클릭하면 데이터베이스 정보 조회해서 비교하기
-// idCheck.onclick = () =>{
-//
-// }
+idCheck.onclick = () =>{
+
+}
+
+joinForm.addEventListener("submit", function(e) {
+    if(!check_all()){
+        e.preventDefault();
+        console.log("여기옴");
+    }
+    else{
+        console.log("통과함");
+    }
+});
 
 
 

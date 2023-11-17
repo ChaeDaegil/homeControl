@@ -60,7 +60,7 @@ form{
 <main>
     <section>
         <h2>로그인 페이지</h2>
-        <form action="#" id="login" method="post">
+        <form action="loginCheck.jsp" id="login" method="post">
             <div>
                 <label>ID</label><input type="text" name="ID" class="input">
             </div>
@@ -81,7 +81,25 @@ form{
 
 <script>
     const joinToBtn = document.getElementById("toJoin");
+    const loginForm = document.getElementById("login");
+    const [id, pw] = document.getElementsByTagName("input");
+
     joinToBtn.onclick = () =>{
         window.location.href = "join_member.jsp";
     }
+
+    loginForm.addEventListener("submit", function(e) {
+        if(id.value.length === 0){
+            alert("id를 입력하세요");
+            e.preventDefault();
+        }
+        else if(pw.value.length === 0){
+            alert("password를 입력하세요")
+            e.preventDefault();
+        }
+        else if(!correctPw){
+            alert("비밀번호를 확인하세요!")
+            e.preventDefault();
+        }
+    });
 </script>

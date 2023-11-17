@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     session.setAttribute("test","a");
+
 %>
 <html>
 <head>
@@ -19,7 +20,7 @@
         </aside>
         <div id="mainSect">
             <article>
-                <iframe name="mainframe" src="homeControl_main.jsp" frameborder="0"></iframe>
+                <iframe name="mainframe" src="homeControl_main.jsp"></iframe>
             </article>
         </div>
     </main>

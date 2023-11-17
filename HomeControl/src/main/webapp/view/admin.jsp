@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <html>
 <head>
     <title>Title</title>
@@ -23,7 +24,6 @@
         position:absolute;
         padding:90px 70px 50px 70px;
         display: flex;
-        background-color: bisque;
     }
 
     aside{
@@ -47,7 +47,6 @@
     header{
         height: 50px;
         position: relative;
-        background-color: burlywood;
     }
     header > section{
         display: flex;
@@ -60,7 +59,7 @@
         align-content: center;
     }
     #mainSect{
-        background-color: aqua;
+        border: 1px solid slategray;
         position: relative;
     }
     #leftSect{
@@ -99,7 +98,7 @@
         <h4>메뉴판</h4>
         <ul>
             <li><a href="admin_main.jsp" target="mainframe">메인</a></li>
-            <li><a href="admin_mail.jsp" target="mainframe">문의 확인</a></li>
+            <li><a href="admin_mailbox.jsp" target="mainframe">문의 확인</a></li>
         </ul>
     </aside>
 
