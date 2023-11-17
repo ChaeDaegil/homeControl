@@ -6,11 +6,28 @@
 <html>
 <%
     //String user_id =  session.getAttribute("test").toString();
+
     String user_id = "4";
     DBManager.newInstance();
-    ResultSet res;
+    ResultSet res = null;
     try {
-        res = DBManager.getInstance().getDBUserMail().SelectDBUserAllMail(user_id);
+        String sel = request.getParameter("sel");
+        String search = request.getParameter("search");
+
+        if(sel!=null&&!sel.isBlank()){
+
+            if(sel.equals("제목")){
+                DBManager.getInstance();
+                DBManager.getInstance().getDBUserMail();
+
+                res = DBManager.getInstance().getDBUserMail().SelectDBUserSearchTitle(user_id,search);
+            }
+            else if(sel.equals("내용")){
+                res = DBManager.getInstance().getDBUserMail().SelectDBUserSearchContent(user_id,search);
+            }
+        }else{
+            res = DBManager.getInstance().getDBUserMail().SelectDBUserAllMail(user_id);
+        }
     } catch (SQLException e) {
         throw new RuntimeException(e);
     }
@@ -23,14 +40,15 @@
 <body>
     <h2>문의 내용</h2>
     <hr>
-    <form action="#">
+    <form action="">
         <span class="left"></span>
         <span class="right">
             <select>
-                <option value="제목" name="제목">제목</option>
+                <option value="제목" name="sel_title">제목</option>
+                <option value="내용" name="sel_content">내용</option>
             </select>
-            <input type="text">
-            <input type="submit" name="search" value="검색">
+            <input type="text" class="search_text" maxlength="12">
+            <button type="button" class="search_btn" >검색</button>
         </span>
     </form>
     <div class="writer_div">
@@ -62,7 +80,7 @@
                     <td class="mail_title"><%=mail_title%></td>
                     <td><%=ID%></td>
                     <td><%=uc_date%></td>
-                    <td><%=admin_content !=null&&admin_content.isBlank()?"O":"X"%></td>
+                    <td><%=admin_content !=null&&!admin_content.isBlank()?"O":"X"%></td>
                 </tr>
             <%
                     index++;
@@ -79,6 +97,16 @@
 </html>
 <script defer>
     const mail_rows = document.querySelectorAll('tbody>tr');
+    const writeBtn = document.querySelector('.writer_div>button');
+    const searchBtn = document.querySelector('.search_btn');
+    const searchText = document.querySelector('.search_text');
+    const searchSelect = document.querySelector('select');
+    searchBtn.onclick=()=>{
+        location.href = "/view/homeControl_mailbox.jsp?sel="+searchSelect.selectedOptions[0].value+"&search="+searchText.value;
+    }
+    writeBtn.onclick = () =>{
+        location.href = "/view/write_mail.jsp";
+    };
     mail_rows.forEach(mail=>{
        mail.onclick = (event)=>{
            location.href = "/view/homeControl_mail.jsp?mail_id="+event.currentTarget.querySelector('td').innerText;
