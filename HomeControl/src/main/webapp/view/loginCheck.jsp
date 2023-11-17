@@ -24,7 +24,13 @@
             if (res.getString("PW").equals(pw)) {
                 String id_num = res.getString("id_num");
                 session.setAttribute("userid",id_num);
-                response.sendRedirect("/view/homeControl.jsp");
+                if(res.getString("auth").equals("1")){
+                    response.sendRedirect("/view/admin.jsp");
+                }
+                else {
+                    response.sendRedirect("/view/homeControl.jsp");
+                }
+
             }
             else{
                 response.sendRedirect("/view/login.jsp");
