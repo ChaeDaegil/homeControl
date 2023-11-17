@@ -30,6 +30,30 @@ public class DBUserMail {
         );
         return stmt.executeQuery(sql);
     }
+    public ResultSet SelectDBUserSearchTitle(String user_id,String title) throws SQLException {
+        String sql = String.format(
+                "select * from user_mail " +
+                "inner join user " +
+                "on user_mail.user_id = user.id_num " +
+                "where user_mail.user_id = '%s' and " +
+                "INSTR(title,'%s')>0"
+                , user_id
+                ,title
+        );
+        return stmt.executeQuery(sql);
+    }
+    public ResultSet SelectDBUserSearchContent(String user_id,String content) throws SQLException {
+        String sql = String.format(
+                "select * from user_mail " +
+                "inner join user " +
+                "on user_mail.user_id = user.id_num " +
+                "where user_mail.user_id = '%s' and " +
+                "INSTR(user_content,'%s')>0"
+                , user_id
+                ,content
+        );
+        return stmt.executeQuery(sql);
+    }
     public Boolean insertDBUserMail(String user_id,String title,String user_content) throws SQLException {
         String sql = String.format(
                 "insert into user_mail (user_id,title,user_content) " +
