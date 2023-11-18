@@ -5,7 +5,7 @@ import java.sql.*;
 public class DBManager{
     private static DBManager Instance = null;
     private static Connection conn = null;
-    private static String url = "jdbc:mysql://redcan.iptime.org:4322/home";
+    private static String url = "jdbc:mysql://redcan.myDS.me:4322/home";
     private static String user = "root";
     private static String pw = "1234";
     private static DBMachine dbMachine = null;
