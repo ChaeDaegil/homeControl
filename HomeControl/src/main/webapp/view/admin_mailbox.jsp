@@ -94,7 +94,7 @@
                  <option value="제목" name="sel_title" id="sel_title">제목</option>
                 <option value="글쓴이" name="sel_user" id="sel_user">글쓴이</option>
             </select>
-           <input type="text" class="search_text" maxlength="12">
+           <input type="text" class="search_text" id="search_text" maxlength="12">
             <button type="button" class="search_btn" id="search">검색</button>
         </span>
 </form>
@@ -148,8 +148,11 @@
     const mail_rows = document.querySelectorAll('tbody>tr');
     const searchBtn = document.getElementById("search");
     const selecter = document.querySelector("select");
+    const searchText = document.getElementById("search_text");
 
     searchBtn.onclick = () => {
+        console.log(selecter.selectedOptions[0].value);
+        console.log(searchText.value);
         location.href = "/view/admin_mailbox.jsp?sel="+selecter.selectedOptions[0].value+"&search="+searchText.value;
     }
 
