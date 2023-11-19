@@ -91,11 +91,11 @@
     <span class="left">##개 메일이 있습니다.</span>
     <span class="right">
             <select>
-                 <option value="제목" name="sel_title">제목</option>
-                <option value="글쓴이" name="sel_user">글쓴이</option>
+                 <option value="제목" name="sel_title" id="sel_title">제목</option>
+                <option value="글쓴이" name="sel_user" id="sel_user">글쓴이</option>
             </select>
            <input type="text" class="search_text" maxlength="12">
-            <button type="button" class="search_btn" >검색</button>
+            <button type="button" class="search_btn" id="search">검색</button>
         </span>
 </form>
 <table>
@@ -146,6 +146,13 @@
 <script>
 
     const mail_rows = document.querySelectorAll('tbody>tr');
+    const searchBtn = document.getElementById("search");
+    const selecter = document.querySelector("select");
+
+    searchBtn.onclick = () => {
+        location.href = "/view/admin_mailbox.jsp?sel="+selecter.selectedOptions[0].value+"&search="+searchText.value;
+    }
+
 
     mail_rows.forEach(mail=>{
         mail.onclick = (event)=>{
