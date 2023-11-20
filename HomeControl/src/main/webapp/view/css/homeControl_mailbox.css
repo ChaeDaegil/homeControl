@@ -38,6 +38,9 @@ table td:nth-child(2){
     text-align: center;
     padding: 5px;
 }
+.page{
+    margin: 0 auto;
+}
 table td a{
     display: inline-block;
     text-overflow: ellipsis;

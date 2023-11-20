@@ -3,13 +3,19 @@
 <%
     String menu = request.getParameter("sel_menu");
 %>
-<html>
+
+<html lang="eu">
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="css/homControl.css">
 </head>
+
 <body>
+    <div class="right">
+        <button>로그 아웃</button>
+    </div>
     <main>
+
         <aside id="leftSect" >
             <h4>메뉴판</h4>
             <ul>
@@ -23,5 +29,14 @@
             </article>
         </div>
     </main>
+    <form action="" class="sendForm" method="post"></form>
 </body>
 </html>
+<script>
+    const logoutBtn = document.querySelector('button');
+    logoutBtn.onclick = ()=>{
+        const form = document.querySelector('.sendForm');
+        form.action = "/logout";
+        form.submit();
+    }
+</script>

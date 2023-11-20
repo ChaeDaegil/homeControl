@@ -35,7 +35,17 @@ li{
 li :hover{
     background-color: #a7cbff;
 }
+header{
+    height: 50px;
+    position: relative;
+}
+header > section{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
 
+}
 h4{
     align-content: center;
 }
@@ -61,3 +71,15 @@ a{
     text-decoration: none;
     color: black;
 }
+.right {
+    height: 50px;
+    position: relative;
+    background-color: bisque;
+}
+.right>button{
+    width: 100px;
+    position: absolute;
+    top:50%;
+    left:80%
+}
+
