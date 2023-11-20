@@ -65,5 +65,11 @@
     logoutBtn.onclick = () =>{
         window.location.href = "/logout";
     }
+    window.onpageshow = function (event) {
+        if (event.persisted) {
+            // history.go(1);
+            location.href = "/view/login.jsp";
+        }
+    };
 </script>
 

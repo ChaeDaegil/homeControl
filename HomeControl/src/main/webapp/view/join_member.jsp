@@ -1,5 +1,3 @@
-<%@ page import="com.example.homecontrol.DB.DBManager" %>
-<%@ page import="java.sql.ResultSet" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 
