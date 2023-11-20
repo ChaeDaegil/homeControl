@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    String menu = request.getParameter("sel_menu");
     if(session.getAttribute("userid")==null){
         response.sendRedirect("/logout");
     }
@@ -42,4 +41,10 @@
         form.action = "/logout";
         form.submit();
     }
+    window.onpageshow = function (event) {
+        if (event.persisted) {
+            location.href = "/view/login.jsp";
+        }
+    };
+
 </script>
