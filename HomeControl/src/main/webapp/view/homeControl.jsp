@@ -20,8 +20,22 @@
         <div id="mainSect">
             <article>
                 <iframe name="mainframe" src="homeControl_main.jsp" frameborder="0"></iframe>
+                <iframe name="servFrane" src="homeControl_main.jsp" frameborder="0" style="display: none"></iframe>
             </article>
         </div>
     </main>
 </body>
 </html>
+<script>
+    let switchCheck = true;
+    setInterval(refresh,1000)
+
+    function refresh(){
+        const [mainframe,servFrane] = document.querySelectorAll("iframe");
+        servFrane.contentDocument.location.reload(true);
+        mainframe.contentWindow.document.querySelector("body").innerHTML = servFrane.contentWindow.document.querySelector("body").innerHTML;
+        // servFrane.style.display = "block";
+        // mainframe.style.display = "none";
+        // servFrane.contentDocument.location.reload(true);
+    }
+</script>

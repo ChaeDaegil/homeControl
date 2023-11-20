@@ -31,6 +31,12 @@ public class updateDbServlet extends HttpServlet {
                 DBManager.getInstance().getDbMachine().updateStateDBMachine(state,id_num);
                 resp.sendRedirect("/view/homeControl_main.jsp");
             }
+            else if(db.equals("machine") && type.equals("name")){
+                String id_num = req.getParameter("id_num");
+                String name = req.getParameter("name");
+                DBManager.getInstance().getDbMachine().updateNameDBMachine(name,id_num);
+                resp.sendRedirect("/view/homeControl_main.jsp");
+            }
             else if(db.equals("user_mail")){
                 String mail_id = req.getParameter("mail_id");
                 String title = req.getParameter("title");
