@@ -19,14 +19,15 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="css/homControl_main.css?after">
+    <link href="css/homControl_main.css?after" rel="stylesheet" type="text/css">
 </head>
 <body>
 <main>
     <div class="btn_div">
         <div class="message"></div>
         <input class="machine_input" type="text">
-        <button value="<%=user_id%>">추가</button>
+        <button class="refreshBtn">새로고침</button>
+        <button class="insertBtn" value="<%=user_id%>">추가</button>
     </div>
     <div class="machine_list">
         <%
@@ -59,7 +60,7 @@
                 </button>
             </div>
             <div class="machine_button_con">
-                <button value="<%=id_num%>,<%=index%>">수정</button>
+                <button class="update_btn" value="<%=id_num%>,<%=index%>">수정</button>
                 <button value="<%=id_num%>">삭제</button>
             </div>
         </div>
@@ -73,11 +74,14 @@
 </body>
 </html>
 <script>
-    const insertBtn = document.querySelector('.btn_div>button');
+    const insertBtn = document.querySelector('.insertBtn');
+    const refreshBtn = document.querySelector('.refreshBtn');
     const machInputTag = document.querySelector('.machine_input');
     const machines = document.querySelectorAll(".machine_list>.machine_con");
     let insertCheck = true;
-
+    refreshBtn.onclick = ()=>{
+        location.reload();
+    }
     insertBtn.onclick=(event) =>{
         if(insertCheck){
             insertBtn.innerText = "기기 추가";

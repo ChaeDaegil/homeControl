@@ -75,9 +75,10 @@ public class DBUserMail {
         String sql = String.format(
                 "select * from user_mail " +"inner join user "
                         + "on user_mail.user_id = user.id_num "
-                        + "where " + "`ID` = `%s`"
+                        + "where " + "INSTR(ID,'%s')>0 "
                 ,user
         );
+        System.out.println(sql);
         return stmt.executeQuery(sql);
     }
     public ResultSet SelectDBUserSearchContent(String user_id,String content) throws SQLException {
