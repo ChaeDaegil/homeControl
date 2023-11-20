@@ -51,6 +51,7 @@
     }
 
     <%
+        session.removeAttribute("userid");
         session.removeAttribute("noID");
     %>
 

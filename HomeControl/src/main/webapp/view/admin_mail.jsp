@@ -18,6 +18,10 @@
     if(admin_content == null){
         admin_content = "";
     }
+
+    String sel = request.getParameter("sel");
+    String pageNum = request.getParameter("pageNum");
+    String search = request.getParameter("search");
 %>
 
 <html>
@@ -67,7 +71,7 @@
         if(answerBtn.innerText === "저장하기"){
             textArea.readOnly = true;
             const form = document.querySelector('.sendForm');
-            form.action = "/update?"+"&mail_id=<%=mail_id%>&db=user_mail&admin_content="+textArea.value;
+            form.action = "/update?"+"&mail_id=<%=mail_id%>&db=user_mail&admin_content="+textArea.value+"&sel=<%=sel%>&search=<%=search%>&pageNum=<%=pageNum%>";
             form.submit();
         }
         else{

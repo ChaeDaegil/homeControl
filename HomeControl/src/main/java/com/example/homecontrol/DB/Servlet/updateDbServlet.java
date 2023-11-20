@@ -1,12 +1,14 @@
 package com.example.homecontrol.DB.Servlet;
 
 import com.example.homecontrol.DB.DBManager;
+import com.mysql.cj.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.stream.Location;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -42,13 +44,17 @@ public class updateDbServlet extends HttpServlet {
                 String title = req.getParameter("title");
                 String content = req.getParameter("content");
                 String adminContent = req.getParameter("admin_content");
+                String sel = req.getParameter("sel");
+                String search = req.getParameter("search");
+                String pageNum = req.getParameter("pageNum");
+
                 if(adminContent.isEmpty()){
                     DBManager.getInstance().getDBUserMail().updateDBUserMailContent(mail_id,title,content);
                     resp.sendRedirect("/view/homeControl_mailbox.jsp");
                 }
                 else {
                     DBManager.getInstance().getDBUserMail().updateDBUserMailContent(mail_id,adminContent);
-                    resp.sendRedirect("/view/admin_mailbox.jsp?sel=&search=&pageNum=1");
+                    resp.sendRedirect("/view/admin_mailbox.jsp?sel="+sel+"&search="+search+"&pageNum="+pageNum);
                 }
 
 

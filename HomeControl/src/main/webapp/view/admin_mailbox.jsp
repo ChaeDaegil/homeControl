@@ -4,9 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%!
 
-%>
 
 <%
     DBManager.newInstance();
@@ -24,7 +22,6 @@
 
     String sel;
     String search;
-    int total_user;
 
     try {
 
@@ -32,15 +29,13 @@
         search = request.getParameter("search");
         ResultSet allMailCount;
 
-
-
         //페이지 시작이 몇번 째 메일인지 구함
         int beginMailNum = (intPage - 1) * onePageMail;
 
         if(sel!=null&&!sel.isBlank()){
             if(sel.equals("제목")){
 
-                //쪽수를 결정할 게시물개수를 얻음
+                //쪽수를 결정할 게시물 개수를 얻음
                 allMailCount = DBManager.getInstance().getDBUserMail().GetSearchTitleMailCount(search);
                 if(allMailCount.next()){
                     mailCount = allMailCount.getString("count");
@@ -51,7 +46,7 @@
             }
             else if(sel.equals("글쓴이")){
 
-                //쪽수를 결정할 게시물개수를 얻음
+                //쪽수를 결정할 게시물 개수를 얻음
                 allMailCount = DBManager.getInstance().getDBUserMail().GetSearchUserMailCount(search);
                 if(allMailCount.next()){
                     mailCount = allMailCount.getString("count");
@@ -62,7 +57,7 @@
             }
         }else{
 
-            //쪽수를 결정할 게시물개수를 얻음
+            //쪽수를 결정할 게시물 개수를 얻음
             allMailCount = DBManager.getInstance().getDBUserMail().GetAllUserMailCount();
             if(allMailCount.next()){
                 mailCount = allMailCount.getString("count");
@@ -80,7 +75,6 @@
     int lastPage = Integer.parseInt(mailCount)%onePageMail == 0? Integer.parseInt(mailCount)/onePageMail : Integer.parseInt(mailCount)/onePageMail + 1;
     int nextPage = intPage < lastPage? intPage+1 : lastPage;
     int beforePage = intPage > 1? intPage -1 : intPage;
-
 %>
 
 
@@ -170,10 +164,9 @@
         location.href = "/view/admin_mailbox.jsp?sel="+selecter.selectedOptions[0].value+"&search="+searchText.value+"&pageNum=1";
     }
 
-
     mail_rows.forEach(mail=>{
         mail.onclick = (event)=>{
-            location.href = "/view/admin_mail.jsp?mail_id="+event.currentTarget.querySelector('td').innerText;
+            location.href = "/view/admin_mail.jsp?mail_id="+event.currentTarget.querySelector('td').innerText+"&sel=<%=sel%>&search=<%=search%>&pageNum=<%=intPage%>";
         }
     });
 

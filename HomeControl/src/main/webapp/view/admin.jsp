@@ -1,13 +1,14 @@
 <%@ page import="com.example.homecontrol.DB.DBManager" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="com.mysql.cj.Session" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
+
     DBManager.newInstance();
     ResultSet res = null;
     String total_user = "0";
+
 
     res = DBManager.getInstance().getDBUser().CountDBUser();
     if(res.next()){
@@ -58,9 +59,6 @@
     const logoutBtn = document.getElementById("logout");
 
     logoutBtn.onclick = () =>{
-        <%
-        session.removeAttribute("userid");
-        %>
         window.location.href = "login.jsp";
     }
 </script>
