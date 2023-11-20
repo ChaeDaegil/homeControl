@@ -48,7 +48,7 @@ public class updateDbServlet extends HttpServlet {
                 }
                 else {
                     DBManager.getInstance().getDBUserMail().updateDBUserMailContent(mail_id,adminContent);
-                    resp.sendRedirect("/view/admin_mailbox.jsp");
+                    resp.sendRedirect("/view/admin_mailbox.jsp?sel=&search=&pageNum=1");
                 }
 
 

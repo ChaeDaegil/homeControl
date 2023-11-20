@@ -1,5 +1,20 @@
+<%@ page import="com.example.homecontrol.DB.DBManager" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="com.mysql.cj.Session" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    DBManager.newInstance();
+    ResultSet res = null;
+    String total_user = "0";
+
+    res = DBManager.getInstance().getDBUser().CountDBUser();
+    if(res.next()){
+        total_user = res.getString("count");
+    }
+
+%>
 
 
 <html>
@@ -10,7 +25,7 @@
 
 <header>
     <section id="headSect">
-        <div>몰라 회원 수 몇명</div>
+        <div>총 회원 수 <%=total_user%>명</div>
         <div><input type="button" value="로그아웃" id="logout"></div>
     </section>
 </header>
@@ -24,7 +39,7 @@
         <h4>메뉴판</h4>
         <ul>
             <li><a href="admin_main.jsp" target="mainframe">메인</a></li>
-            <li><a href="admin_mailbox.jsp" target="mainframe">문의 확인</a></li>
+            <li><a href="admin_mailbox.jsp?sel=&search=&pageNum=1" target="mainframe">문의 확인</a></li>
         </ul>
     </aside>
 
@@ -43,6 +58,9 @@
     const logoutBtn = document.getElementById("logout");
 
     logoutBtn.onclick = () =>{
+        <%
+        session.removeAttribute("userid");
+        %>
         window.location.href = "login.jsp";
     }
 </script>
