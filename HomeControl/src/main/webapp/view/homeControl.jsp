@@ -2,6 +2,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String menu = request.getParameter("sel_menu");
+    if(session.getAttribute("userid")==null){
+        response.sendRedirect("/logout");
+    }
 %>
 
 <html lang="eu">
