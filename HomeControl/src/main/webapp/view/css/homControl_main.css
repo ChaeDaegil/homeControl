@@ -48,6 +48,10 @@ main{
     box-sizing: border-box;
     border-bottom: none;
 }
+.machine_title>input{
+    width: 100%;
+}
+
 .machine_state_con{
     height: 40px;
     border:1px solid black;

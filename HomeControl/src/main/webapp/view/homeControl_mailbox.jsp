@@ -1,6 +1,7 @@
 <%@ page import="com.example.homecontrol.DB.DBManager" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="com.google.protobuf.Empty" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -62,7 +63,11 @@
         </thead>
         <tbody>
             <%
-                int index = 1;
+                Object object = request.getParameter("index");
+                int index = 0;
+                if(object!=null){
+                    index = Integer.parseInt(request.getParameter("index"));
+                }
                 while (res.next()){
                     String ID = res.getString("ID");
                     String user_mail_id = res.getString("user_mail_id");
