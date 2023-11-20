@@ -1,18 +1,20 @@
 <%@ page import="com.example.homecontrol.DB.DBManager" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="java.sql.PreparedStatement" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-    //String user_id =  session.getAttribute("test").toString();
-//    String user_id = (String)session.getAttribute("userid");
+
     DBManager.newInstance();
     ResultSet res = null;
+    String mailCount;
 
     try {
         String sel = request.getParameter("sel");
         String search = request.getParameter("search");
+        ResultSet allMailCount;
 
         if(sel!=null&&!sel.isBlank()){
 
@@ -23,10 +25,21 @@
                 res = DBManager.getInstance().getDBUserMail().SelectDBUserSearchUser(search);
             }
         }else{
+            allMailCount = DBManager.getInstance().getDBUserMail().GetAllUserMailCount();
+            if(allMailCount.next()){
+                mailCount = allMailCount.getString("count");
+            }
             res = DBManager.getInstance().getDBUserMail().SelectDBAllMail();
+
+//
         }
     } catch (SQLException e) {
         throw new RuntimeException(e);
+    }
+
+    String pageNum = "1";
+    if(request.getParameter("pageNum") != null){
+        pageNum = request.getParameter("pageNum");
     }
 %>
 
@@ -37,54 +50,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="css/admin_mailbox.css">
 </head>
-<style>
 
-    a{
-        text-decoration: none;
-        color: black;
-    }
-    form{
-        padding: 5px;
-        display: flex;
-        justify-content: space-between;
-    }
-    table{
-        padding: 7px 0;
-        width: 100%;
-        text-align: center;
-        table-layout: fixed;
-    }
-    table th{
-        background-color: slategray;
-        border-top: 2px solid gray;
-        padding: 5px;
-    }
-    table td{
-        border-bottom: 2px solid gray;
-        padding: 5px;
-        margin: 5px;
-    }
-    table td:nth-child(2){
-        width: 50%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    .center{
-        text-align: center;
-        padding: 5px;
-    }
-    hr{
-
-    }
-    table td a{
-        display: inline-block;
-        text-overflow: ellipsis;
-        height: 100%;
-        width: 100%;
-    }
-
-</style>
 <body>
 <h2>요기는 문의 메일함</h2>
 <hr>

@@ -26,6 +26,13 @@ public class DBUserMail {
         return stmt.executeQuery(sql);
     }
 
+    public ResultSet GetAllUserMailCount() throws SQLException {
+        String sql = String.format(
+                "select COUNT(*) as count from user_mail" + " inner join user " +
+                        "on user_mail.user_id = user.id_num "
+        );
+        return stmt.executeQuery(sql);
+    }
     public ResultSet SelectDBUserMail(String mail_id) throws SQLException {
         String sql = String.format(
                 "select * from user_mail where user_mail_id = '%s'"
