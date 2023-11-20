@@ -23,32 +23,8 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="css/admin_mail.css">
 </head>
-<style>
-
-    .user_content{
-        position: relative;
-        height: 30%;
-    }
-    .admin_content{
-        height: 30%;
-        position: relative;
-    }
-    .btn_div{
-        display: flex;
-        justify-content: right;
-        text-align: right;
-        margin: 10px;
-    }
-    textarea{
-        width: 100%;
-        height: 100%;
-        resize: none;
-        box-sizing: border-box;
-    }
-
-</style>
-
 
 
 <body>

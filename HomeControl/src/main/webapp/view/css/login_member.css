@@ -1,0 +1,52 @@
+main{
+    width:100%;
+    margin:auto;
+    max-width:525px;
+    min-height:670px;
+    position:relative;
+}
+section{
+    background-color: burlywood;
+    box-sizing: border-box;
+    width:100%;
+    height:100%;
+    position:absolute;
+    padding:90px 70px 50px 70px;
+
+}
+#joinForm{
+    min-height:345px;
+    position:relative;
+}
+div{
+    padding: 10px;
+    margin-bottom:15px;
+}
+h2{
+    display: inline-block;
+    align-items: center;
+}
+.input{
+    border:none;
+    padding:15px 20px;
+    border-radius:25px;
+    width: 100%;
+}
+label{
+    font-size: 12px;
+    display: block;
+    width: 100%;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+form{
+    background-color: bisque;
+}
+.right{
+    margin-top: 5px;
+    position: absolute;
+    display: block;
+    right: 0;
+}

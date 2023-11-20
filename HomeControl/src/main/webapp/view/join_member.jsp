@@ -5,93 +5,41 @@
 
 
 <html>
-<style>
-main{
-    width:100%;
-    margin:auto;
-    max-width:525px;
-    min-height:670px;
-    position:relative;
-}
-section{
-    background-color: burlywood;
-    box-sizing: border-box;
-    width:100%;
-    height:100%;
-    position:absolute;
-    padding:90px 70px 50px 70px;
 
-}
-#joinForm{
-    min-height:345px;
-    position:relative;
-}
-div{
-    padding: 10px;
-    margin-bottom:15px;
-}
-h2{
-    display: inline-block;
-    align-items: center;
-}
-.input{
-    border:none;
-    padding:15px 20px;
-    border-radius:25px;
-    width: 100%;
-}
-label{
-    font-size: 12px;
-    display: block;
-    width: 100%;
-}
-.buttons{
-    display: flex;
-    justify-content: center;
-}
-form{
-    background-color: bisque;
-}
-.right{
-    margin-top: 5px;
-    position: absolute;
-    display: block;
-    right: 0;
-}
-
-</style>
-
+<head>
+    <title>join_member</title>
+    <link rel="stylesheet" href="css/login_member.css">
+</head>
 <body>
 
-    <main>
-        <section>
-            <h2>회원가입 페이지</h2>
-            <form action="<c:url value="/newuserinsert"/>" id="joinForm" method="post">
-                <div>
-                    <label for="newID">ID</label><input type="text" id="newID" class="input" name="newID">
-                    <input class="right" type="button" id="idCheck"  value="id중복 확인" name="idCheck">
-                </div>
-                <div>
-                    <label for="newPW">PASSWORD</label><input type="password" id="newPW" class="input" name="newPW">
-                </div>
-                <div>
-                    <label for="pwCheck">PASSWORD REPEAT</label><input type="password" id="pwCheck" class="input" name="pwCheck">
-                </div>
-                <div class="buttons">
-                    <input type="button" value="취소" name="cancel">
-                    <button name="join" id="join">가입</button>
-                </div>
-            </form>
-        </section>
-    </main>
+<main>
+    <section>
+        <h2>회원가입 페이지</h2>
+        <form action="<c:url value="/newuserinsert"/>" id="joinForm" method="post">
+            <div>
+                <label for="newID">ID</label><input type="text" id="newID" class="input" name="newID">
+                <input class="right" type="button" id="idCheck"  value="id중복 확인" name="idCheck">
+            </div>
+            <div>
+                <label for="newPW">PASSWORD</label><input type="password" id="newPW" class="input" name="newPW">
+            </div>
+            <div>
+                <label for="pwCheck">PASSWORD REPEAT</label><input type="password" id="pwCheck" class="input" name="pwCheck">
+            </div>
+            <div class="buttons">
+                <input type="button" value="취소" name="cancel">
+                <button name="join" id="join">가입</button>
+            </div>
+        </form>
+    </section>
+</main>
 
 
 
 
 </body>
-<head>
-    <title>join_member</title>
-</head>
+
+
 </html>
 
 <script>
