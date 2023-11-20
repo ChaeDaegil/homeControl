@@ -19,7 +19,7 @@
                 <input class="right" type="button" id="idCheck"  value="id중복 확인" name="idCheck">
             </div>
             <div>
-                <label for="newPW">PASSWORD</label><input type="password" id="newPW" class="input" name="newPW" placeholder="숫자, 영문, 특수기호 포함 10~20글자">
+                <label for="newPW">PASSWORD</label><input type="password" id="newPW" class="input" name="newPW" placeholder="숫자, 영문, 특수기호 포함 8~20글자">
             </div>
             <div>
                 <label for="pwCheck">PASSWORD REPEAT</label><input type="password" id="pwCheck" class="input" name="pwCheck">
@@ -54,9 +54,9 @@
         let chpassword = pwCheck.value;
             console.log(chpassword);
         // id reg
-        const idRegExp = /^[A-Za-z]{4,20}$/;
+        const idRegExp = /^[A-Za-z0-9]{4,20}$/;
         // pw reg
-        const pwRegExp = /^[a-zA-Z0-9~!@#$%^&*()_-]{10,20}$/;
+        const pwRegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
         if(!idRegExp.test(id)){
             console.log(id);
