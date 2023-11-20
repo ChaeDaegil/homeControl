@@ -19,7 +19,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="css/homControl_main.css">
+    <link rel="stylesheet" href="css/homControl_main.css?after">
 </head>
 <body>
 <main>
@@ -30,6 +30,7 @@
     </div>
     <div class="machine_list">
         <%
+            int index = 0;
             while (res.next()){
                 String machine_name = res.getString("machine_name");
                 String id_num = res.getString("id_num");
@@ -37,8 +38,8 @@
         %>
         <div class="machine_con">
             <div class="machine_title">
-                <input style="display: none" type="text">
-                <%=machine_name%>
+                <input value="<%=machine_name%>"  style="display: none" type="text">
+                <span><%=machine_name%></span>
             </div>
             <div class="machine_state_con">
                 <button class="machine_state" value="<%=id_num%>">
@@ -58,11 +59,11 @@
                 </button>
             </div>
             <div class="machine_button_con">
-                <button value="<%=id_num%>">수정</button>
+                <button value="<%=id_num%>,<%=index%>">수정</button>
                 <button value="<%=id_num%>">삭제</button>
             </div>
         </div>
-        <%    }
+        <% index++;   }
         %>
 
     </div>
@@ -98,14 +99,30 @@
         const stateBtn = machine.querySelector('.machine_state');
         const form = document.querySelector('.test');
 
-        updateBtn.onclick = ()=>{
+        updateBtn.onclick = (event)=>{
+            let machineId = event.currentTarget.value.split(",")[0];
+            let index = event.currentTarget.value.split(",")[1];
+            const box = machines.item(Number(index));
+            const con = box.querySelector('.machine_title');
+            const inputTag = box.querySelector('input');
+            const spanTag = box.querySelector('span');
 
+            if(event.currentTarget.innerText==="수정"){
+                spanTag.innerText = "";
+                inputTag.style.display = "block";
+                event.currentTarget.innerText = "저장";
+            }
+            else{
+                spanTag.innerText = inputTag.value;
+                inputTag.style.display = "none";
+                event.currentTarget.innerText = "수정";
+                form.action = "/update?id_num=" + machineId+"&name="+inputTag.value+"&type=name&db=machine";
+                form.submit();
+            }
         }
         stateBtn.onclick = (event)=>{
             let machineId = event.currentTarget.value;
             let state = event.currentTarget.innerText ==="켜짐"?0:1;
-            console.log(machineId);
-            console.log(state);
             form.action = "/update?id_num=" + machineId+"&state="+state+"&type=state&db=machine";
             form.submit();
         }

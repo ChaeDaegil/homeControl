@@ -30,7 +30,7 @@ main{
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    align-content: stretch;
+    align-items: flex-start;
 
 }
 .machine_list>div{
