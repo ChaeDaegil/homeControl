@@ -9,6 +9,10 @@
     ResultSet res = null;
     String total_user = "0";
 
+    if(session.getAttribute("userid") == null){
+        response.sendRedirect("/logout");
+    }
+
 
     res = DBManager.getInstance().getDBUser().CountDBUser();
     if(res.next()){
@@ -59,7 +63,7 @@
     const logoutBtn = document.getElementById("logout");
 
     logoutBtn.onclick = () =>{
-        window.location.href = "login.jsp";
+        window.location.href = "/logout";
     }
 </script>
 

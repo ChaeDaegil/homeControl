@@ -9,10 +9,20 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 @WebServlet("/logout")
 public class logoutServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        session.removeAttribute("userid");
+        resp.sendRedirect("/view/login.jsp");
+
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("userid");
         resp.sendRedirect("/view/login.jsp");
+
     }
 }
