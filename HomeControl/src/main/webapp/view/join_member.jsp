@@ -17,11 +17,11 @@
         <h2>회원가입 페이지</h2>
         <form action="<c:url value="/newuserinsert"/>" id="joinForm" method="post">
             <div>
-                <label for="newID">ID</label><input type="text" id="newID" class="input" name="newID">
+                <label for="newID">ID</label><input type="text" id="newID" class="input" name="newID" placeholder="영문 시작 4~20글자">
                 <input class="right" type="button" id="idCheck"  value="id중복 확인" name="idCheck">
             </div>
             <div>
-                <label for="newPW">PASSWORD</label><input type="password" id="newPW" class="input" name="newPW">
+                <label for="newPW">PASSWORD</label><input type="password" id="newPW" class="input" name="newPW" placeholder="숫자, 영문, 특수기호 포함 10~20글자">
             </div>
             <div>
                 <label for="pwCheck">PASSWORD REPEAT</label><input type="password" id="pwCheck" class="input" name="pwCheck">
@@ -67,6 +67,7 @@
             newId.focus();
             return false;
         }
+
         else if(!pwRegExp.test(password)){
             alert("형식에 맞춰 password를 입력해주세요");
             newPw.value = "";
@@ -98,11 +99,6 @@ cancel.onclick = () =>{
     window.location.href = "login.jsp";
 }
 
-
-// 클릭하면 데이터베이스 정보 조회해서 비교하기
-idCheck.onclick = () =>{
-
-}
 
 joinForm.addEventListener("submit", function(e) {
     if(!check_all()){

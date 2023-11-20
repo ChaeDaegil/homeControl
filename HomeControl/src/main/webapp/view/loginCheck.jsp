@@ -1,10 +1,9 @@
 <%@ page import="com.example.homecontrol.DB.DBManager" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="com.mysql.cj.Session" %>
+<%@ page import="java.net.http.HttpClient" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 
 
 <%
@@ -36,12 +35,16 @@
                 response.sendRedirect("/view/login.jsp");
             }
         }
-     else response.sendRedirect("/view/login.jsp");
+     else {
+         session.setAttribute("noID",1);
+         response.sendRedirect("/view/login.jsp");
+     }
+
      } catch (SQLException e) {
      throw new RuntimeException(e);
  }
-
 %>
+
 <html>
 <head>
     <title>Title</title>

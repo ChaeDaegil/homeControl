@@ -1,5 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    int noID = 0;
+
+    if(session.getAttribute("noID") != null){
+        noID = (int)session.getAttribute("noID");
+    }
+
+    boolean idchecek = noID == 1;
+%>
 
 <html>
 <head>
@@ -35,6 +44,15 @@
     const joinToBtn = document.getElementById("toJoin");
     const loginForm = document.getElementById("login");
     const [id, pw] = document.getElementsByTagName("input");
+
+    if(<%=idchecek%>){
+        alert("아이디를 확인해주세요");
+        console.log("아이디없음");
+    }
+
+    <%
+        session.removeAttribute("noID");
+    %>
 
     joinToBtn.onclick = () =>{
         window.location.href = "join_member.jsp";
