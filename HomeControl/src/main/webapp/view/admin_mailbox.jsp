@@ -24,6 +24,7 @@
 
     String sel;
     String search;
+    int total_user;
 
     try {
 
@@ -31,7 +32,10 @@
         search = request.getParameter("search");
         ResultSet allMailCount;
 
-        int beginMailNum = (intPage - 1) * 12;
+
+
+        //페이지 시작이 몇번 째 메일인지 구함
+        int beginMailNum = (intPage - 1) * onePageMail;
 
         if(sel!=null&&!sel.isBlank()){
             if(sel.equals("제목")){
@@ -88,7 +92,10 @@
 </head>
 
 <body>
-<h2>요기는 문의 메일함</h2>
+<section>
+
+
+<h2>문의 메일함</h2>
 <hr>
 <form action="#">
     <span class="left"><%=mailCount%>개 메일이 있습니다.</span>
@@ -115,7 +122,7 @@
     <tbody>
     <%
         // 메일 넘버를 셈 + 출력
-        int index = Integer.parseInt(mailCount) - ((intPage-1) * 12);
+        int index = Integer.parseInt(mailCount) - ((intPage-1) * onePageMail);
         while (res.next()){
             String ID = res.getString("ID");
             String user_mail_id = res.getString("user_mail_id");
@@ -145,7 +152,7 @@
     <a href="#" class="pageBtn"><%=intPage%></a>
     <a href="admin_mailbox.jsp?sel=<%=sel%>&search=<%=search%>&pageNum=<%=nextPage%>" class="pageBtn">다음 ▶</a>
 </div>
-
+</section>
 </body>
 </html>
 

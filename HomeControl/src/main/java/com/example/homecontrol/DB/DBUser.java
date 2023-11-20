@@ -19,6 +19,13 @@ public class DBUser {
         );
         return stmt.executeQuery(sql);
     }
+
+    public ResultSet CountDBUser( ) throws SQLException {
+        String sql = String.format(
+                "select COUNT(*) as count from user"
+        );
+        return stmt.executeQuery(sql);
+    }
     public ResultSet SelectDBUser(String user_num) throws SQLException {
         String sql = String.format(
                 "select * from user where id_num = '%s'"
