@@ -33,6 +33,17 @@ public class DBUserMail {
         );
         return stmt.executeQuery(sql);
     }
+
+    public ResultSet GetSearchUserMailCount(String user) throws SQLException {
+        String sql = String.format(
+                "select COUNT(*) as count from user_mail " +"inner join user "
+                        + "on user_mail.user_id = user.id_num "
+                        + "where " + "INSTR(ID,'%s')>0 "
+                ,user
+        );
+        return stmt.executeQuery(sql);
+    }
+
     public ResultSet SelectDBUserMail(String mail_id) throws SQLException {
         String sql = String.format(
                 "select * from user_mail where user_mail_id = '%s'"
@@ -45,11 +56,27 @@ public class DBUserMail {
                 "select * from user_mail " +
                 "inner join user " +
                 "on user_mail.user_id = user.id_num " +
-                "where user_mail.user_id = '%s' ",
+                "where user_mail.user_id = '%s' " +
+                "ORDER BY user_mail_id DESC",
                 user_id
         );
         return stmt.executeQuery(sql);
     }
+
+    public ResultSet wantPageMail(int start_num, int end_num) throws SQLException {
+        String sql = String.format(
+                "select * from user_mail " +
+                        "inner join user " +
+                        "on user_mail.user_id = user.id_num " +
+                        "ORDER BY user_mail_id DESC " +
+                        "LIMIT %d, %d ",
+                start_num, end_num
+        );
+        System.out.println(start_num);
+        System.out.println(end_num);
+        return stmt.executeQuery(sql);
+    }
+
     public ResultSet SelectDBUserSearchTitle(String user_id,String title) throws SQLException {
         String sql = String.format(
                 "select * from user_mail " +
@@ -71,6 +98,29 @@ public class DBUserMail {
         );
         return stmt.executeQuery(sql);
     }
+
+    public ResultSet GetSearchTitleMailCount(String title) throws SQLException {
+        String sql = String.format(
+                "select COUNT(*) as count from user_mail " +"inner join user "
+                        + "on user_mail.user_id = user.id_num "
+                        + "where " + "INSTR(title,'%s')>0 "
+                ,title
+        );
+        return stmt.executeQuery(sql);
+    }
+
+    public ResultSet SearchTitleWantPageMail(String title,int start_num, int end_num) throws SQLException {
+        String sql = String.format(
+                "select * from user_mail " +"inner join user "
+                        + "on user_mail.user_id = user.id_num "
+                        + "where " + "INSTR(title,'%s')>0 "
+                        + "ORDER BY user_mail_id DESC LIMIT "
+                        + "%d, %d "
+                ,title, start_num, end_num
+        );
+        return stmt.executeQuery(sql);
+    }
+
     public ResultSet SelectDBUserSearchUser(String user) throws SQLException {
         String sql = String.format(
                 "select * from user_mail " +"inner join user "
@@ -78,9 +128,21 @@ public class DBUserMail {
                         + "where " + "INSTR(ID,'%s')>0 "
                 ,user
         );
-        System.out.println(sql);
         return stmt.executeQuery(sql);
     }
+
+    public ResultSet SearchUserWantPageMail(String user,int start_num, int end_num) throws SQLException {
+        String sql = String.format(
+                "select * from user_mail " +"inner join user "
+                        + "on user_mail.user_id = user.id_num "
+                        + "where " + "INSTR(ID,'%s')>0 "
+                        + "ORDER BY user_mail_id DESC LIMIT "
+                        + "%d, %d "
+                ,user , start_num, end_num
+        );
+        return stmt.executeQuery(sql);
+    }
+
     public ResultSet SelectDBUserSearchContent(String user_id,String content) throws SQLException {
         String sql = String.format(
                 "select * from user_mail " +

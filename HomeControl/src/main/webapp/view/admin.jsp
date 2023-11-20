@@ -24,7 +24,7 @@
         <h4>메뉴판</h4>
         <ul>
             <li><a href="admin_main.jsp" target="mainframe">메인</a></li>
-            <li><a href="admin_mailbox.jsp" target="mainframe">문의 확인</a></li>
+            <li><a href="admin_mailbox.jsp?sel=&search=&pageNum=1" target="mainframe">문의 확인</a></li>
         </ul>
     </aside>
 
