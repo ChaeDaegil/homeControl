@@ -27,7 +27,7 @@
                 <label>ID</label><input type="text" name="ID" class="input">
             </div>
             <div>
-                <label>PASSWORD</label><input type="text" name="PW" class="input">
+                <label>PASSWORD</label><input type="password" name="PW" class="input">
             </div>
 
             <div class="buttons">

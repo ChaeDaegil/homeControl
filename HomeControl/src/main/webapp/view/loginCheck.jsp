@@ -22,6 +22,7 @@
             if (res.getString("PW").equals(pw)) {
                 String id_num = res.getString("id_num");
                 session.setAttribute("userid",id_num);
+                session.setAttribute("auth",res.getString("auth"));
                 if(res.getString("auth").equals("1")){
                     response.sendRedirect("/view/admin.jsp");
                 }

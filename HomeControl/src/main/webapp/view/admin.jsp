@@ -9,7 +9,7 @@
     ResultSet res = null;
     String total_user = "0";
 
-    if(session.getAttribute("userid") == null){
+    if(session.getAttribute("userid") == null || !session.getAttribute("auth").equals("1")){
         response.sendRedirect("/logout");
     }
 
@@ -65,6 +65,8 @@
     logoutBtn.onclick = () =>{
         window.location.href = "/logout";
     }
+
+    <%--// <%=session.getAttribute("userid")%> == null--%>
     window.onpageshow = function (event) {
         if (event.persisted) {
             // history.go(1);

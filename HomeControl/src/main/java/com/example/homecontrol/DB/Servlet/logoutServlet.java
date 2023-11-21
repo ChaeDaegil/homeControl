@@ -14,6 +14,7 @@ public class logoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("userid");
+        session.removeAttribute("auth");
         resp.sendRedirect("/view/login.jsp");
 
     }
@@ -22,6 +23,7 @@ public class logoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("userid");
+        session.removeAttribute("auth");
         resp.sendRedirect("/view/login.jsp");
 
     }

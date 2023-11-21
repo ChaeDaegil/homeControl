@@ -16,8 +16,12 @@
     // 한페이지 최대 게시량을 지정
     final int onePageMail = 12;
 
+    String pageNum = "1";
+    if(request.getParameter("pageNum") != null){
+        pageNum = request.getParameter("pageNum");
+    }
     //현재 페이지파라미터를 받음
-    String pageNum = request.getParameter("pageNum");
+
     int intPage = Integer.parseInt(pageNum);
 
     String sel;

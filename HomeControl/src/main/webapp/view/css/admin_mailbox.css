@@ -30,6 +30,7 @@ table td:nth-child(2){
     white-space: nowrap;
 }
 .center{
+    /*bottom: 0;*/
     text-align: center;
     padding: 5px;
 }
@@ -41,4 +42,7 @@ table td a{
     text-overflow: ellipsis;
     height: 100%;
     width: 100%;
+}
+.pageBtn{
+    margin: 0 5px;
 }

@@ -14,7 +14,7 @@ main{
     position:absolute;
     padding:90px 70px 50px 70px;
     display: flex;
-    background-color: bisque;
+    /*background-color: bisque;*/
 }
 
 aside{
@@ -50,7 +50,7 @@ h4{
     align-content: center;
 }
 #mainSect{
-    background-color: aqua;
+    /*background-color: none;*/
     position: relative;
 }
 #leftSect{
@@ -74,7 +74,7 @@ a{
 .right {
     height: 50px;
     position: relative;
-    background-color: bisque;
+    /*background-color: bisque;*/
 }
 .right>button{
     width: 100px;
